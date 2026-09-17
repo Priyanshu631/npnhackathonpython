@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pandas
+pyarrow
+fastparquet
+azure-storage-file-datalake
+duckdb
+scikit-learn
+xgboost
+transformers
+python-dotenv
