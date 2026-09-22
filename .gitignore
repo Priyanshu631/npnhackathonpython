@@ -1,6 +1,21 @@
-/venv
-venv
-# Ignore environment variables
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.git/
+.gitignore
+
+notebooks/
+*.ipynb
+
 .env
-.env.local
-.env.*.local
+.env.*
+.vscode/
+
+README.md
+readme.md
+
+Dockerfile
+docker-compose.yml

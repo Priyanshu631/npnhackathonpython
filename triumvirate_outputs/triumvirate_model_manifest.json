@@ -1,0 +1,11 @@
+{
+    "model_name": "triumvirate_fusion",
+    "display_name": "XGBoost + FinBERT + Isolation Forest",
+    "modality": "both",
+    "artifact": "triumvirate_fusion.joblib",
+    "metrics": "triumvirate_fusion_metrics.json",
+    "metadata": "triumvirate_fusion_metadata.json",
+    "requires_finbert_download": true,
+    "finbert_model_name": "ProsusAI/finbert",
+    "finbert_max_length": 128
+}

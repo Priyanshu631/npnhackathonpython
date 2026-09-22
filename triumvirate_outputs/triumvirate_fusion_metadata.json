@@ -1,0 +1,92 @@
+{
+    "bundle_version": "dataset3_triumvirate_v2",
+    "model_type": "triumvirate_late_fusion",
+    "sklearn_version": "1.6.1",
+    "xgboost_version": "3.4.1",
+    "finbert_model_name": "ProsusAI/finbert",
+    "finbert_max_length": 128,
+    "seed": 42,
+    "dataset3_path": "dataset3_gold_with_notes_wild.csv",
+    "dataset1_path": "dataset1_gold_with_notes_wild.csv",
+    "target": "fraud_reported",
+    "text_feature": "adjuster_notes",
+    "shared_features": [
+        "total_claim_amount",
+        "policy_annual_premium",
+        "months_as_customer",
+        "age",
+        "police_report_available"
+    ],
+    "numeric_features": [
+        "policy_annual_premium",
+        "total_claim_amount",
+        "age",
+        "months_as_customer",
+        "number_of_vehicles_involved",
+        "bodily_injuries",
+        "witnesses",
+        "injury_claim",
+        "property_claim",
+        "vehicle_claim"
+    ],
+    "categorical_features": [
+        "policy_state",
+        "insured_sex",
+        "insured_education_level",
+        "insured_occupation",
+        "incident_type",
+        "collision_type",
+        "incident_severity",
+        "authorities_contacted",
+        "police_report_available"
+    ],
+    "isolation_forest": {
+        "training_dataset": "Dataset 1",
+        "contamination": 0.1,
+        "police_report_mapping": {
+            "YES": 1,
+            "all_other_values": 0
+        }
+    },
+    "meta_features": [
+        "xgb_struct_signal",
+        "finbert_text_signal",
+        "isolation_forest_anomaly_signal"
+    ],
+    "metrics": {
+        "accuracy": 0.815,
+        "f1_score": 0.6837606837606838,
+        "precision": 0.5882352941176471,
+        "recall": 0.8163265306122449,
+        "roc_auc": 0.8751182592242195,
+        "pr_auc": 0.7211182632518591,
+        "confusion_matrix": [
+            [
+                123,
+                28
+            ],
+            [
+                9,
+                40
+            ]
+        ],
+        "inference_latency_sec": 0.35753488540649414,
+        "lr_coefficients": {
+            "xgb_struct_signal": 2.87661877281868,
+            "finbert_text_signal": 3.988747881267937,
+            "isolation_forest_anomaly_signal": 0.45041520827943676
+        },
+        "top_risk_words": {
+            "evidence": 0.11738631518295696,
+            "corroborate": 0.1015209272045992,
+            "gaps": 0.09965328425055868,
+            "suspicious": 0.09549379581923341,
+            "conspicuous": 0.09386638384609042,
+            "exactly": 0.0849581021180237,
+            "details": 0.08418286514384951,
+            "say": 0.0773975796626758,
+            "hard": 0.0773975796626758,
+            "lack": 0.07419095088464833
+        }
+    }
+}

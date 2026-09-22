@@ -1,68 +1,80 @@
-# Insurance Fraud Detection - ETL Pipeline
+# Dataset 3 Fraud Intelligence Dashboard
 
-This repository contains the data ingestion and transformation (ETL) pipeline for the Insurance Claims Fraud Detection project. The pipeline extracts raw claims data from an Azure Data Lake Storage (ADLS) Gen2 Bronze container, imputes missing values, synthesizes unstructured adjuster notes for NLP processing, and loads the optimized Parquet file into the Silver container.
+A Streamlit dashboard for the final Dataset 3 fraud-detection model suite.
 
-## Prerequisites
+## Model families
 
-1. **Azure Storage Account**: An ADLS Gen2 storage account with `bronze` and `silver` containers created.
-2. **Raw Data**: The Kaggle Car Insurance Fraud dataset (`car_insurance_claim.csv`) must be uploaded to the root of your `bronze` container.
-3. **Environment Variables**: Create a `.env` file in the root directory of this project and add your Azure connection string:
-   ```env
-   AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=YOUR_ACCOUNT_NAME;AccountKey=YOUR_ACCOUNT_KEY;EndpointSuffix=core.windows.net"
-   ```
+### Structured only
+- Logistic Regression
+- Random Forest
+- XGBoost
 
----
+### Text only
+- TF-IDF + Logistic Regression
+- TF-IDF + Random Forest
+- TF-IDF + XGBoost
+- FinBERT + Logistic Regression
 
-## Execution Method 1: Docker (Recommended)
+### Both
+- RF + TF-IDF late fusion
+- XGBoost + TF-IDF late fusion
+- RF + FinBERT late fusion
+- XGBoost + FinBERT late fusion
+- XGBoost + FinBERT + Isolation Forest (Triumvirate)
 
-Running via Docker ensures a clean, isolated environment using the CPU-optimized version of PyTorch to keep the image lightweight.
+Early-fusion models and the old fusion baseline are intentionally not included.
 
-**1. Build the Docker Image**
-```bash
-docker build -t fraud-pipeline .
+## Folder layout
+
+Put the exported main model suite into `model_outputs/`:
+
+```text
+model_outputs/
+  structured_baseline.joblib
+  text_baseline_tfidf_lr.joblib
+  rf_structured.joblib
+  rf_text.joblib
+  xgb_structured.joblib
+  xgb_text.joblib
+  rf_late_fusion.joblib
+  xgb_late_fusion.joblib
+  finbert_text.joblib
+  rf_late_fusion_finbert.joblib
+  xgb_late_fusion_finbert.joblib
+  baseline_metrics_updated.json
+  late_fusion_metrics.json
+  transformer_fusion_metrics.json
+  final_ranked_metrics.json
+  model_manifest.json
+  deployment_metadata.json
+  requirements.txt
 ```
 
-**2. Execute the ETL Script**
-This command mounts your `.env` variables, runs the Python script, and automatically removes the container (`--rm`) once the process finishes.
-```bash
-docker run --rm --env-file .env fraud-pipeline python main.py
+Put the edited Triumvirate notebook output into `triumvirate_outputs/`:
+
+```text
+triumvirate_outputs/
+  triumvirate_fusion.joblib
+  triumvirate_fusion_metrics.json
+  triumvirate_fusion_metadata.json
+  triumvirate_model_manifest.json
 ```
 
----
+Put `dataset3_gold_with_notes_wild.csv` beside `app.py`.
 
-## Execution Method 2: Local Python Environment
+The app also supports environment variables if your artifacts live elsewhere:
 
-If you prefer to run the script directly on your host machine without Docker, use a virtual environment.
+```text
+DATASET3_MODEL_DIR=/path/to/model_outputs
+DATASET3_TRIUMVIRATE_DIR=/path/to/triumvirate_outputs
+DATASET3_DATA_PATH=/path/to/dataset3_gold_with_notes_wild.csv
+```
 
-**1. Create and Activate a Virtual Environment**
-* **Windows (PowerShell):**
-  ```powershell
-  py -3.11 -m venv venv
-  .\venv\Scripts\Activate.ps1
-  ```
-* **Linux/macOS:**
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
+## Run locally
 
-**2. Install Dependencies**
 ```bash
 pip install -r requirements.txt
-# Overwrite standard PyTorch with the smaller CPU-only wheel
-pip install torch --index-url [https://download.pytorch.org/whl/cpu](https://download.pytorch.org/whl/cpu)
+streamlit run app.py
 ```
 
-**3. Execute the Script**
-```bash
-python main.py
-```
-
----
-
-## Expected Output
-
-Upon successful execution, the terminal will log the processing steps. You can verify the success by navigating to your Azure Portal:
-1. Open your ADLS Gen2 Storage Account.
-2. Navigate to **Containers** > **silver**.
-3. Verify that `silver_claims_fused.parquet` has been successfully generated and uploaded. This file is now ready to be imported into Google Colab for DistilBERT and XGBoost model training.
+The first prediction involving FinBERT downloads `ProsusAI/finbert` and then caches it for the Streamlit process.

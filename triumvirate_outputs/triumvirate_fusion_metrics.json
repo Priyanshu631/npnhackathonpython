@@ -1,0 +1,38 @@
+{
+    "triumvirate_late_fusion": {
+        "accuracy": 0.815,
+        "f1_score": 0.6837606837606838,
+        "precision": 0.5882352941176471,
+        "recall": 0.8163265306122449,
+        "roc_auc": 0.8751182592242195,
+        "pr_auc": 0.7211182632518591,
+        "confusion_matrix": [
+            [
+                123,
+                28
+            ],
+            [
+                9,
+                40
+            ]
+        ],
+        "inference_latency_sec": 0.35753488540649414,
+        "lr_coefficients": {
+            "xgb_struct_signal": 2.87661877281868,
+            "finbert_text_signal": 3.988747881267937,
+            "isolation_forest_anomaly_signal": 0.45041520827943676
+        },
+        "top_risk_words": {
+            "evidence": 0.11738631518295696,
+            "corroborate": 0.1015209272045992,
+            "gaps": 0.09965328425055868,
+            "suspicious": 0.09549379581923341,
+            "conspicuous": 0.09386638384609042,
+            "exactly": 0.0849581021180237,
+            "details": 0.08418286514384951,
+            "say": 0.0773975796626758,
+            "hard": 0.0773975796626758,
+            "lack": 0.07419095088464833
+        }
+    }
+}

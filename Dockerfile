@@ -2,21 +2,37 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends gcc && rm -rf /var/lib/apt/lists/*
+# System dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Install CPU-only PyTorch (crucial for keeping the image lightweight)
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
-COPY . .
+# CPU-only PyTorch
+# Required by FinBERT / Transformers
+RUN pip install --no-cache-dir \
+    torch \
+    --index-url https://download.pytorch.org/whl/cpu
 
-# Expose FastAPI port
-EXPOSE 8000
+# Copy application
+COPY app.py .
+COPY inference.py .
 
-# Start the server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Copy datasets used by the dashboard
+COPY dataset3_gold_with_notes_wild.csv .
+COPY dataset1_gold_with_notes_wild.csv .
+
+# Copy trained model artifacts
+COPY model_outputs ./model_outputs
+COPY triumvirate_outputs ./triumvirate_outputs
+
+# Streamlit port
+EXPOSE 8501
+
+# Start Streamlit
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]

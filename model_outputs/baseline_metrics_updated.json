@@ -1,0 +1,52 @@
+{
+    "structured_baseline": {
+        "accuracy": 0.805,
+        "f1_score": 0.6486486486486487,
+        "precision": 0.5806451612903226,
+        "recall": 0.7346938775510204,
+        "roc_auc": 0.7732125962967968,
+        "pr_auc": 0.5332128000001901,
+        "confusion_matrix": [
+            [
+                125,
+                26
+            ],
+            [
+                13,
+                36
+            ]
+        ],
+        "inference_latency_sec": 0.04287266731262207
+    },
+    "text_baseline": {
+        "accuracy": 0.71,
+        "f1_score": 0.49122807017543857,
+        "precision": 0.4307692307692308,
+        "recall": 0.5714285714285714,
+        "roc_auc": 0.7402351669144479,
+        "pr_auc": 0.5069723279361483,
+        "confusion_matrix": [
+            [
+                114,
+                37
+            ],
+            [
+                21,
+                28
+            ]
+        ],
+        "inference_latency_sec": 0.0010690689086914062,
+        "top_risk_words": {
+            "lack": 3.964232834426081,
+            "hesitant": 2.71491807874835,
+            "vague": 2.7146235446709297,
+            "inconsistent": 2.3754593040729617,
+            "exactly": 2.1916907562884242,
+            "unexplained": 1.949663482574595,
+            "unexplainew": 1.7237810740054313,
+            "tuspicious": 1.5945679647222106,
+            "statemrnt": 1.5631300341335026,
+            "suswicious": 1.4773596983204456
+        }
+    }
+}

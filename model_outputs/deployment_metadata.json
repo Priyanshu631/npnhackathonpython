@@ -1,0 +1,57 @@
+{
+    "dataset": "dataset3_gold_with_notes_wild.csv",
+    "target": "fraud_reported",
+    "target_encoding": {
+        "Y": 1,
+        "N": 0
+    },
+    "numeric_features": [
+        "policy_annual_premium",
+        "total_claim_amount",
+        "age",
+        "months_as_customer",
+        "number_of_vehicles_involved",
+        "bodily_injuries",
+        "witnesses",
+        "injury_claim",
+        "property_claim",
+        "vehicle_claim"
+    ],
+    "categorical_features": [
+        "policy_state",
+        "insured_sex",
+        "insured_education_level",
+        "insured_occupation",
+        "incident_type",
+        "collision_type",
+        "incident_severity",
+        "authorities_contacted",
+        "police_report_available"
+    ],
+    "text_feature": "adjuster_notes",
+    "test_size": 0.2,
+    "random_state": 42,
+    "finbert_model": "ProsusAI/finbert",
+    "finbert_max_length": 128,
+    "finbert_pooling": "CLS",
+    "early_fusion_models": "removed",
+    "models": {
+        "structured": {
+            "structured_baseline": "structured_baseline.joblib",
+            "rf_structured": "rf_structured.joblib",
+            "xgb_structured": "xgb_structured.joblib"
+        },
+        "text": {
+            "text_baseline": "text_baseline_tfidf_lr.joblib",
+            "rf_text": "rf_text.joblib",
+            "xgb_text": "xgb_text.joblib",
+            "finbert_text": "finbert_text.joblib"
+        },
+        "fusion": {
+            "rf_fusion_lr": "rf_late_fusion.joblib",
+            "xgb_fusion_lr": "xgb_late_fusion.joblib",
+            "rf_late_fusion_finbert": "rf_late_fusion_finbert.joblib",
+            "xgb_late_fusion_finbert": "xgb_late_fusion_finbert.joblib"
+        }
+    }
+}

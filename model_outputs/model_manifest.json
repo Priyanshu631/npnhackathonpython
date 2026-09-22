@@ -1,0 +1,19 @@
+{
+    "structured": {
+        "structured_baseline": "structured_baseline.joblib",
+        "rf_structured": "rf_structured.joblib",
+        "xgb_structured": "xgb_structured.joblib"
+    },
+    "text": {
+        "text_baseline": "text_baseline_tfidf_lr.joblib",
+        "rf_text": "rf_text.joblib",
+        "xgb_text": "xgb_text.joblib",
+        "finbert_text": "finbert_text.joblib"
+    },
+    "fusion": {
+        "rf_fusion_lr": "rf_late_fusion.joblib",
+        "xgb_fusion_lr": "xgb_late_fusion.joblib",
+        "rf_late_fusion_finbert": "rf_late_fusion_finbert.joblib",
+        "xgb_late_fusion_finbert": "xgb_late_fusion_finbert.joblib"
+    }
+}
