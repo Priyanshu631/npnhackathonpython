@@ -285,31 +285,32 @@ with tab_predict:
     if modality in ("Structured only", "Both"):
         st.markdown("### Structured claim details")
 
-        with st.form("structured_claim_form"):
-            ncols = 3
-            cols = st.columns(ncols)
+        ncols = 3
+        cols = st.columns(ncols)
 
-            for i, feature in enumerate(NUMERIC_FEATURES):
-                with cols[i % ncols]:
-                    default = float(data[feature].median()) if feature in data.columns else 0.0
-                    values[feature] = st.number_input(
-                        feature.replace("_", " ").title(),
-                        value=default,
-                        step=1.0,
-                        format="%.2f",
-                        key=f"pred_num_{feature}",
-                    )
+        for i, feature in enumerate(NUMERIC_FEATURES):
+            with cols[i % ncols]:
+                default = float(data[feature].median()) if feature in data.columns else 0.0
 
-            st.markdown("### Categorical details")
-            cols = st.columns(3)
+                values[feature] = st.number_input(
+                    feature.replace("_", " ").title(),
+                    value=default,
+                    step=1.0,
+                    format="%.2f",
+                    key=f"pred_num_{feature}",
+                )
 
-            for i, feature in enumerate(CATEGORICAL_FEATURES):
-                with cols[i % 3]:
-                    values[feature] = st.selectbox(
-                        feature.replace("_", " ").title(),
-                        options[feature],
-                        key=f"pred_cat_{feature}",
-                    )
+        st.markdown("### Categorical details")
+
+        cols = st.columns(3)
+
+        for i, feature in enumerate(CATEGORICAL_FEATURES):
+            with cols[i % 3]:
+                values[feature] = st.selectbox(
+                    feature.replace("_", " ").title(),
+                    options[feature],
+                    key=f"pred_cat_{feature}",
+                )
 
     # ------------------------------------------------------------
     # Text input: visible only for Text / Both
