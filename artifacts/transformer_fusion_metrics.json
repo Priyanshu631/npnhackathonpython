@@ -1,0 +1,263 @@
+{
+    "rf_structured": {
+        "accuracy": 0.9495,
+        "f1_score": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "roc_auc": 0.5611838435028338,
+        "pr_auc": 0.058363227785649056,
+        "confusion_matrix": [
+            [
+                1899,
+                0
+            ],
+            [
+                101,
+                0
+            ]
+        ],
+        "inference_latency_sec": 0.08358383178710938
+    },
+    "rf_text": {
+        "accuracy": 0.808,
+        "f1_score": 0.232,
+        "precision": 0.14536340852130325,
+        "recall": 0.5742574257425742,
+        "roc_auc": 0.735066397635024,
+        "pr_auc": 0.17098938588766496,
+        "confusion_matrix": [
+            [
+                1558,
+                341
+            ],
+            [
+                43,
+                58
+            ]
+        ],
+        "inference_latency_sec": 0.10204577445983887,
+        "top_risk_words": {
+            "conspicuous": 0.0717116918508875,
+            "say": 0.05118662222403004,
+            "vague": 0.0489239007533442,
+            "hard": 0.04618167300093399,
+            "lack": 0.046174544071534034,
+            "claimant": 0.046133545711824375,
+            "questioned": 0.045492998157078496,
+            "timeline": 0.04090707838134889,
+            "details": 0.039047589487705765,
+            "evidence": 0.03509969029007366
+        }
+    },
+    "rf_fusion_lr": {
+        "accuracy": 0.6655,
+        "f1_score": 0.173053152039555,
+        "precision": 0.09887005649717515,
+        "recall": 0.693069306930693,
+        "roc_auc": 0.729813502677282,
+        "pr_auc": 0.17111842078643835,
+        "confusion_matrix": [
+            [
+                1261,
+                638
+            ],
+            [
+                31,
+                70
+            ]
+        ],
+        "inference_latency_sec": 0.35184812545776367,
+        "lr_coefficients": {
+            "rf_struct_signal": -2.6862768971780615,
+            "rf_text_signal": 3.2774367790589447
+        }
+    },
+    "xgb_structured": {
+        "accuracy": 0.931,
+        "f1_score": 0.028169014084507043,
+        "precision": 0.04878048780487805,
+        "recall": 0.019801980198019802,
+        "roc_auc": 0.5023175303312322,
+        "pr_auc": 0.050637827963017634,
+        "confusion_matrix": [
+            [
+                1860,
+                39
+            ],
+            [
+                99,
+                2
+            ]
+        ],
+        "inference_latency_sec": 0.03255176544189453
+    },
+    "xgb_text": {
+        "accuracy": 0.7545,
+        "f1_score": 0.21187800963081863,
+        "precision": 0.12643678160919541,
+        "recall": 0.6534653465346535,
+        "roc_auc": 0.7830515279016054,
+        "pr_auc": 0.21777933033486774,
+        "confusion_matrix": [
+            [
+                1443,
+                456
+            ],
+            [
+                35,
+                66
+            ]
+        ],
+        "inference_latency_sec": 0.04803013801574707,
+        "top_risk_words": {
+            "inconsistent": 0.11958947032690048,
+            "entirely": 0.09322644025087357,
+            "vague": 0.06602363288402557,
+            "lack": 0.05652390047907829,
+            "gaps": 0.03705408796668053,
+            "conspicuous": 0.035964976996183395,
+            "hesitant": 0.024444475769996643,
+            "suspicious": 0.022573169320821762,
+            "unsuspicious": 0.02046290412545204,
+            "say": 0.02039562165737152
+        }
+    },
+    "xgb_fusion_lr": {
+        "accuracy": 0.6815,
+        "f1_score": 0.18018018018018017,
+        "precision": 0.10355029585798817,
+        "recall": 0.693069306930693,
+        "roc_auc": 0.7851083686567709,
+        "pr_auc": 0.2307576083526212,
+        "confusion_matrix": [
+            [
+                1293,
+                606
+            ],
+            [
+                31,
+                70
+            ]
+        ],
+        "inference_latency_sec": 0.05062127113342285,
+        "lr_coefficients": {
+            "xgb_struct_signal": -0.45245922197643534,
+            "xgb_text_signal": 3.384818735301675
+        }
+    },
+    "finbert_text": {
+        "accuracy": 0.8795,
+        "f1_score": 0.38676844783715014,
+        "precision": 0.2602739726027397,
+        "recall": 0.7524752475247525,
+        "roc_auc": 0.8277363281351832,
+        "pr_auc": 0.24331767156389428,
+        "confusion_matrix": [
+            [
+                1683,
+                216
+            ],
+            [
+                25,
+                76
+            ]
+        ],
+        "inference_latency_sec": 2.3037803173065186,
+        "top_risk_words": {
+            "vague": 0.16002305558297433,
+            "hard": 0.12412196360314656,
+            "say": 0.1237714160906248,
+            "lack": 0.11163168527047954,
+            "details": 0.11138672165309424,
+            "exactly": 0.09527256926629307,
+            "impact": 0.08392629718197665,
+            "timeline": 0.06829702503057922,
+            "statement": 0.06784874459915924,
+            "conspicuous": 0.06752978003368183
+        }
+    },
+    "rf_early_fusion_finbert": {
+        "accuracy": 0.9405,
+        "f1_score": 0.2222222222222222,
+        "precision": 0.3269230769230769,
+        "recall": 0.16831683168316833,
+        "roc_auc": 0.8082576030114861,
+        "pr_auc": 0.2302578456347833,
+        "confusion_matrix": [
+            [
+                1864,
+                35
+            ],
+            [
+                84,
+                17
+            ]
+        ],
+        "inference_latency_sec": 2.387988328933716
+    },
+    "xgb_early_fusion_finbert": {
+        "accuracy": 0.9225,
+        "f1_score": 0.23645320197044334,
+        "precision": 0.23529411764705882,
+        "recall": 0.2376237623762376,
+        "roc_auc": 0.8070427895870156,
+        "pr_auc": 0.21114432999044852,
+        "confusion_matrix": [
+            [
+                1821,
+                78
+            ],
+            [
+                77,
+                24
+            ]
+        ],
+        "inference_latency_sec": 2.3340516090393066
+    },
+    "rf_late_fusion_finbert": {
+        "accuracy": 0.847,
+        "f1_score": 0.3347826086956522,
+        "precision": 0.21448467966573817,
+        "recall": 0.7623762376237624,
+        "roc_auc": 0.829183155282353,
+        "pr_auc": 0.2351614281646623,
+        "confusion_matrix": [
+            [
+                1617,
+                282
+            ],
+            [
+                24,
+                77
+            ]
+        ],
+        "inference_latency_sec": 2.3850257396698,
+        "lr_coefficients": {
+            "rf_struct_signal": -1.8534797716280305,
+            "finbert_text_signal": 4.337421548920473
+        }
+    },
+    "xgb_late_fusion_finbert": {
+        "accuracy": 0.8505,
+        "f1_score": 0.34285714285714286,
+        "precision": 0.22033898305084745,
+        "recall": 0.7722772277227723,
+        "roc_auc": 0.8295194448354788,
+        "pr_auc": 0.2456857983844536,
+        "confusion_matrix": [
+            [
+                1623,
+                276
+            ],
+            [
+                23,
+                78
+            ]
+        ],
+        "inference_latency_sec": 2.3294520378112793,
+        "lr_coefficients": {
+            "xgb_struct_signal": -0.16513853298551737,
+            "finbert_text_signal": 4.331161304853249
+        }
+    }
+}
